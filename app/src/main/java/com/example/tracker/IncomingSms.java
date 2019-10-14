@@ -40,7 +40,7 @@ public class IncomingSms extends BroadcastReceiver {
                     String message = currentMessage.getDisplayMessageBody();
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; Saved: "+savedNumber+"; message: " + message);
                     if(senderNum.equals(savedNumber)) {
-                        if (message.contains("location")) {
+                        if (message.toLowerCase().contains("location")) {
 
                             Utils.startService(context);
                         }/*if(message.contains("status")){

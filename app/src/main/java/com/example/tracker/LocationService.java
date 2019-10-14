@@ -94,25 +94,36 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public void onLocationChanged(Location location) {
         if(location!=null){
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            String message="https://www.google.com/maps/@"+String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude())+",16z";
             try {
-                List<Address> addresses=geocoder.getFromLocation(
-                        location.getLatitude(),
-                        location.getLongitude(),
-                        1);
-                StringBuilder message=new StringBuilder();
-                message.append("Latitude: ");
-                message.append(location.getLatitude());
-                message.append("\n");
-                message.append("Longitude: ");
-                message.append(location.getLongitude());
-                message.append("\n");
-                message.append("Address: ");
-                message.append(addresses.get(0).getAddressLine(0));
+//                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+//                List<Address> addresses=geocoder.getFromLocation(
+//                        location.getLatitude(),
+//                        location.getLongitude(),
+//                        1);
 
+//                String message=location.getLatitude()+","+location.getLongitude();
+//                StringBuilder message=new StringBuilder();
+//                message.append("Latitude: ");
+//                message.append(location.getLatitude());
+//                message.append("\n");
+//                message.append("Longitude: ");
+//                message.append(location.getLongitude());
+//                message.append("\n");
+//                message.append("Address: ");
+//                message.append(addresses.get(0).getAddressLine(0));
+//                StringBuilder message=new StringBuilder();
+//                message.append("You can see my location,");
+//                message.append("\n");
+//                message.append("https://www.google.com/maps/@");
+//                message.append(location.getLatitude());
+//                message.append(",");
+//                message.append(location.getLongitude());
+//                message.append(",");
+//                message.append("15z");
                 Utils.sendSMS(this,Utils.getPreferences(this,MainActivity.MOBILE),
-                        message.toString());
-            } catch (IOException e) {
+                        message);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
